@@ -1,7 +1,20 @@
 
 //_____________________________________________________________________________
-//  Global varriables
+//  Object
 //=============================================================================
+
+//Constructor of an object called GameCharacter
+function GameCharacter (health, attackPower, counterAttackPwr) {
+  this.health = health;
+  this.attackPower = attackPower;
+  this.baseAttack = attackPower;
+  this.counterAttackPwr = counterAttackPwr;
+
+  this.attackAction = function () {
+    this.attackPower += this.baseAttack;
+    return this.attackPower;
+  }
+};
 
 
 //_____________________________________________________________________________
@@ -9,9 +22,11 @@
 //=============================================================================
 
 
+
 //_____________________________________________________________________________
 //  Main
 //=============================================================================
+
 
 
 
@@ -63,4 +78,23 @@
 * Your players should be able to win and lose the game no matter what character they choose. 
 The challenge should come from picking the right enemies, not choosing the strongest player.
 
+*/
+
+/*
+var gameCharacter = {
+  //Characters Health
+  health: null, 
+  //Overall attack power
+  attackPower: null,
+  //using this to keep track of initial attack power
+  baseAttack: null,
+  //Counter used for enemy  
+  counterAttackPwr: null,
+
+  //Performing attacking increases 
+  attackAction: function () {
+    this.attackPower += this.baseAttack;
+    return this.attackPower;
+  }
+};
 */
