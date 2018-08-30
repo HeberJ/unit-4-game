@@ -4,23 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <!--My reset style sheet-->
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <!--My style sheet-->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!--bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!--jQuery-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+  <title>Start Wars RPG Game</title>
 </head>
 <body>
-  <head id="banner">Star Wars RPG</head>
+  <header id="banner">
+    Star Wars RPG
+  </header>
+
   <section id="mainSection">
-    <h3 id="mainHeading">Choose Your Ally</h3>
-
-    <div>
-      <h4>Your Ally</h4>
-      <img src="" alt="">
-    </div>
-    <div>
-      <h4>Enemies Available to Attack</h4>
-      
+    <div id="choices" >
     </div>
 
-    <h4>Defender</h4>
+    <div id="ally" > 
+    </div>
+
+    <div id="enemies" >
+    </div>
+
+    <div id="defenderDiv" >
+    </div>
+
+    <button type="button" class="btn btn-danger">
+      Start
+    </button>
   </section>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
 </html>
