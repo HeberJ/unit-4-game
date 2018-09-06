@@ -34,10 +34,10 @@ $(document).ready(function() {
   // holders for the player chosen character and who he chooses to battle
   var playerSelectedChar;
   var enemyChar;
+  var allyId;
   var gameStarted = false;
   var characterSelected = false;
   var enemySelected = false;
-  var fightStarted = false;
 
 
   //*****************************************************************************
@@ -137,7 +137,6 @@ $(document).ready(function() {
       default:
         break;
     }
-
   }
 
   // Action after clicking start button -----------------------------

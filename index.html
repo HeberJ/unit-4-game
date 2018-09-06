@@ -17,26 +17,28 @@
 </head>
 <body>
   <header id="banner">
-    Star Wars RPG
+    <h1>Star Wars RPG</h1>
   </header>
-
-  <section id="mainSection">
-    <div id="choices" >
-    </div>
-
-    <div id="ally" > 
-    </div>
-
-    <div id="enemies" >
-    </div>
-
-    <div id="defenderDiv" >
-    </div>
-
-    <button type="button" class="btn btn-danger">
-      Start
-    </button>
-  </section>
+  <figure id="bodyFigure">
+    <section id="choicesSection">
+      <div id="choices" >
+      </div>
+    </section>
+    
+    <section id="mainSection">
+      <span id="fightSpan" class="row">
+        <div id="ally" class="col" > 
+        </div>
+        
+        <div id="defenderDiv" class="col">
+        </div>
+      </span>
+      
+      <button id="startButton" type="button" class="btn btn-danger d-flex justify-content-center align-middle">
+        Start
+      </button>
+    </section>
+  </figure>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="assets/javascript/game.js"></script>
