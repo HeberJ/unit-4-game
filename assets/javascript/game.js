@@ -21,10 +21,10 @@ $(document).ready(function() {
   };
 
   // Character in the game -----------------
-  var yoda = new GameCharacter (200, 20, 20);
-  var darthMaul = new GameCharacter (182, 15, 10);
-  var revan = new GameCharacter (174, 20, 10);
-  var maceWindu = new GameCharacter (162, 13, 22);
+  var yoda = new GameCharacter (120, 9, 15);
+  var darthMaul = new GameCharacter (180, 7, 20);
+  var revan = new GameCharacter (150, 9, 20);
+  var maceWindu = new GameCharacter (100, 14, 5);
 
 
   // holders for the player chosen character and who he chooses to battle
@@ -52,6 +52,7 @@ $(document).ready(function() {
   var allyHealthDiv = $("#allyHealth");
   var defenderHealthDiv = $("#defenderHealth");
   var attackButtonDiv = $("#attackButtonDiv");
+  var resetButtonDiv = $("#resetButtonDiv");
 
   // text Elements not in the HTML-------------------------
   var characterOptionsText = $("<h2 id='charOptionsTxt'>...Choose Your Ally Wisely...</h2>");
@@ -67,7 +68,7 @@ $(document).ready(function() {
 
   // attack button -----------------------------------------
   var attackButton = $("<button id='attackButton' type='button' class='btn btn-danger d-flex justify-content-center align-middle'>Attack</button>");
-
+  var resetButton = $("<button id='resetButton' type='button' class='btn btn-danger d-flex justify-content-center align-middle'>Reset</button>");
 
   //*****************************************************************************
   //  Functions
@@ -167,6 +168,7 @@ $(document).ready(function() {
   // Action after clicking start button -----------------------------
   function startButton () {
     $("#mainSection").on("click", ".btn", function() {
+      resetButtonDiv.append(resetButton);
       if (!gameStarted) {
         $(this).remove();
         gameStarted = true;
@@ -176,6 +178,12 @@ $(document).ready(function() {
       }
     }); 
   }  
+
+  // Resets Game ----------------------------------------------------
+  
+  $("#mainSection").on("click", "#resetButton", function () {
+    location.reload();
+  });
 
   // Action after clicking a character ------------------------------
   function characterSelectScreen() {
@@ -216,7 +224,7 @@ $(document).ready(function() {
         allyHealthDiv.html(ally.health);
       }
       
-      if (enemy.health <= 0) {
+      if (enemy.health <= 1) {
         defenderHealthDiv.html("0");
         wins++;
         enemySelected = false;
@@ -224,7 +232,7 @@ $(document).ready(function() {
         enemySelectScreen();
       }
 
-      if (ally.health <= 0) {
+      if (ally.health <= 1) {
         allyHealthDiv.html("0");
         allyLabelDiv.html("...YOU LOSE...")
         setTimeout(function() {location.reload()}, 3000);
