@@ -1,25 +1,45 @@
 
+body {
+  background-image: url("../images/5737031-wallpaper-star-wars.jpg");
+  background-size: auto;
+  background-position: center;
+  height: 800px;
+}
+html {
+  background-color: rgba(190,190,190,.6);
+}
+#bodyFigure {
+  background-color: rgba(190,190,190,.6); 
+  height: 88%;
+}
+
 /* banner style */
 #banner h1 {
   font-size: 80px;
   text-align: center;
   margin: 0 auto;
-}
-
-#bodyFigure {
+  background-color: rgba(190,190,190,.6);
 }
 
 #choicesSection {
   width: 800px;
   margin: 0 auto;
   text-align: center;
+  font-size: 50px;
 }
 
 #mainSection {
   width: 800px;
-  height: 500px;
+  height: 300px;
   position: relative;
   margin: 0 auto;
+  text-align: center;
+  font-size: 50px;
+}
+
+#labelSpan {
+  margin: 0 auto;
+  text-align: center;
 }
 
 #fightSpan {
@@ -27,12 +47,23 @@
   text-align: center;
 }
 
-#ally {
+#healthSpan {
   margin: 0 auto;
   text-align: center;
 }
 
-button {
+
+
+#attackButtonDiv {
+  margin: auto !important;
+  position: relative;
+}
+
+#attackButton {
+  margin: 0 auto;
+}
+
+#startButton {
   width: 200px;
   height: 100px;
   position: relative;
@@ -40,4 +71,6 @@ button {
   margin: 0 auto !important;
   font-size: 50px !important;
 }
+
+
 

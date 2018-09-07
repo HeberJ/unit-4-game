@@ -16,28 +16,26 @@ $(document).ready(function() {
     //When a character attacks, his attack will increase by the initial attack power
     this.attackAction = function () {
       this.attackPower += this.baseAttack;
-      return this.attackPower;
+      //return this.attackPower;
     }
   };
 
   // Character in the game -----------------
   var yoda = new GameCharacter (200, 20, 20);
-  var darthMaul = new GameCharacter (182, 15, 25);
+  var darthMaul = new GameCharacter (182, 15, 10);
   var revan = new GameCharacter (174, 20, 10);
   var maceWindu = new GameCharacter (162, 13, 22);
 
-  console.log(yoda);  
-  console.log(darthMaul);
-  console.log(revan);
-  console.log(maceWindu);  
 
   // holders for the player chosen character and who he chooses to battle
+  var ally;
+  var enemy;
   var playerSelectedChar;
   var enemyChar;
+  var wins = 0; 
   var gameStarted = false;
   var characterSelected = false;
   var enemySelected = false;
-  var fightStarted = false;
 
 
   //*****************************************************************************
@@ -47,10 +45,13 @@ $(document).ready(function() {
  // Storing the HTML elements into variables--------------
   var mainSectionDiv = $("#mainSection");
   var choicesDiv = $("#choices");
+  var allyLabelDiv = $("#allyLabel");
+  var defenderLabelDiv = $("#defenderLabel");
   var allyDiv = $("#ally");
-  var allyHeadingDiv = $("#allyHeading");
   var defenderDiv = $("#defenderDiv");
-  var attackEnemyHeadingTag = $("#attackEnemyHeading");
+  var allyHealthDiv = $("#allyHealth");
+  var defenderHealthDiv = $("#defenderHealth");
+  var attackButtonDiv = $("#attackButtonDiv");
 
   // text Elements not in the HTML-------------------------
   var characterOptionsText = $("<h2 id='charOptionsTxt'>...Choose Your Ally Wisely...</h2>");
@@ -63,6 +64,9 @@ $(document).ready(function() {
   var imgOfDarthMaul = $("<img id='imgOfDarthMaul' src='assets/images/DarthMaul.png' class='character'>").css("width", 150);
   var imgOfRevan = $("<img id='imgOfRevan' src='assets/images/darthRevan5.png' class='character'>").css("width", 150);
   var imgOfMaceWindu = $("<img id='imgOfMaceWindu' src='assets/images/MaceWindu.png' class='character'>" ) .css("width", 150);
+
+  // attack button -----------------------------------------
+  var attackButton = $("<button id='attackButton' type='button' class='btn btn-danger d-flex justify-content-center align-middle'>Attack</button>");
 
 
   //*****************************************************************************
@@ -83,25 +87,33 @@ $(document).ready(function() {
     chosenAlly.remove();
     $("#charOptionsTxt").remove();
     
-    // moving the chosen character up down to mainsection
-    allyDiv.append(allyChosenTxt);
-    // Grabing the image variable from dom
+    allyLabelDiv.html(allyChosenTxt);
+
+    //Rendering th img and health of selected ally
     switch (chosenAlly.attr("id")) {
       case "imgOfYoda":
         //append character here to ally div
-        allyDiv.append(imgOfYoda);
+        allyDiv.html(imgOfYoda);
+        ally = yoda;
+        allyHealthDiv.html(yoda.health);
         break;
     
       case "imgOfDarthMaul":
-        allyDiv.append(imgOfDarthMaul);
+        allyDiv.html(imgOfDarthMaul);
+        ally = darthMaul;
+        allyHealthDiv.html(darthMaul.health);
         break;
 
       case "imgOfRevan":
-        allyDiv.append(imgOfRevan);
+        allyDiv.html(imgOfRevan);
+        ally = revan;
+        allyHealthDiv.html(revan.health);
         break;
 
       case "imgOfMaceWindu":
-        allyDiv.append(imgOfMaceWindu);
+        allyDiv.html(imgOfMaceWindu);
+        ally = maceWindu;
+        allyHealthDiv.html(maceWindu.health);
         break;
     
       default:
@@ -117,33 +129,46 @@ $(document).ready(function() {
     enemyChar.remove();
     enemySelectText.remove();
 
-    defenderDiv.append(enemyChosenTxt);
+    defenderLabelDiv.html(enemyChosenTxt);
 
+    //Rendering th img and health of selected enemy
     switch (enemyChar.attr("id")) {
       case "imgOfYoda":
-        defenderDiv.append(imgOfYoda);
+        defenderDiv.html(imgOfYoda);
+        enemy = yoda;
+        defenderHealthDiv.html(yoda.health);
         break;
       
       case "imgOfDarthMaul":
-        defenderDiv.append(imgOfDarthMaul);
+        defenderDiv.html(imgOfDarthMaul);
+        enemy = darthMaul;
+        defenderHealthDiv.html(darthMaul.health);
         break;
 
       case "imgOfRevan":
-        defenderDiv.append(imgOfRevan);
+        defenderDiv.html(imgOfRevan);
+        enemy = revan;
+        defenderHealthDiv.html(revan.health);
+        break;
 
       case "imgOfMaceWindu":
-        defenderDiv.append(imgOfMaceWindu);
+        defenderDiv.html(imgOfMaceWindu);
+        enemy = maceWindu;
+        defenderHealthDiv.html(maceWindu.health);
+        break;
     
       default:
         break;
     }
-
+    attackButtonDiv.append(attackButton);
+    attack();
   }
 
   // Action after clicking start button -----------------------------
   function startButton () {
     $("#mainSection").on("click", ".btn", function() {
       if (!gameStarted) {
+        $(this).remove();
         gameStarted = true;
         console.log( gameStarted);
         showPlayerChoices();
@@ -176,15 +201,50 @@ $(document).ready(function() {
     });
   }
 
+  function attack() {
+    $("#mainSection").on("click", ".btn", function() {
+      
+      if (enemy.health > -1 && ally.health > -1) {
+        console.log("html second");
+        // Attacking enemy health and updateing html health
+        enemy.health -= ally.attackPower;
+        defenderHealthDiv.html(enemy.health);
+        // Running the attack function to increase attack power
+        ally.attackAction();
+        
+        ally.health -= enemy.counterAttackPwr;
+        allyHealthDiv.html(ally.health);
+      }
+      
+      if (enemy.health <= 0) {
+        defenderHealthDiv.html("0");
+        wins++;
+        enemySelected = false;
+        choicesDiv.append(enemySelectText);
+        enemySelectScreen();
+      }
+
+      if (ally.health <= 0) {
+        allyHealthDiv.html("0");
+        allyLabelDiv.html("...YOU LOSE...")
+        setTimeout(function() {location.reload()}, 3000);
+      }
+
+      if (wins === 4) {
+        $("#choicesSection").html("The Force is Strong in You");
+        $("#mainSection").html("CONGRATS, You win");
+      }
+    });
+  }
+
   
   //*****************************************************************************
   //  MAIN
   //*****************************************************************************
-  function main () {
-    console.log( gameStarted);
-    startButton();
-  }
-  main();
+
+  startButton();
+  
+ 
 });
 
 
